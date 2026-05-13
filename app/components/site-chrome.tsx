@@ -7,7 +7,7 @@ const navItems = [
   { label: "Puja & Rituals", href: "/puja-and-rituals" },
   { label: "Astrology", href: "/astrology" },
   { label: "Shop", href: "#" },
-  { label: "Insights", href: "#" },
+  { label: "Insights", href: "/dharmagya-insight" },
 ];
 
 const quickLinks = [
@@ -17,7 +17,7 @@ const quickLinks = [
   { label: "Puja & Rituals", href: "/puja-and-rituals" },
   { label: "Astrology", href: "/astrology" },
   { label: "Shop", href: "#" },
-  { label: "Dharmagya Insight", href: "#" },
+  { label: "Dharmagya Insight", href: "/dharmagya-insight" },
 ];
 
 const supportLinks = [
