@@ -5,8 +5,8 @@ const services = [
   { title: "Book Pandit Nearby", icon: "pandit", href: "/book-pandit-nearby" },
   { title: "Book Online Puja", icon: "puja", href: "/book-online-puja" },
   { title: "Puja & Rituals", icon: "lotus", href: "/puja-and-rituals" },
-  { title: "Chat to Astrologer", icon: "chat", href: "/astrology" },
-  { title: "Call to Astrologer", icon: "call", href: "/astrology" },
+  { title: "Chat to Astrologer", icon: "chat", href: "/astrology/chat-with-astrologer" },
+  { title: "Call to Astrologer", icon: "call", href: "/astrology/call-to-astrologer" },
   { title: "Shop", icon: "shop", href: "#" },
   { title: "Dharmagya Insight", icon: "insight", href: "#" },
 ];

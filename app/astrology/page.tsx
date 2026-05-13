@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const services = [
   { title: "Chat Astrologer", icon: "chat", href: "/astrology/chat-with-astrologer" },
-  { title: "Call Astrologer", icon: "call", href: "#" },
+  { title: "Call Astrologer", icon: "call", href: "/astrology/call-to-astrologer" },
   { title: "Kundli", icon: "kundli", href: "#" },
   { title: "Horoscope", icon: "horoscope", href: "#" },
   { title: "Kundli Matching", icon: "matching", href: "#" },
@@ -234,12 +234,12 @@ export default function AstrologyPage() {
                         >
                           Chat
                         </Link>
-                        <a
-                          href="#"
+                        <Link
+                          href="/astrology/call-to-astrologer"
                           className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-xs font-extrabold text-white shadow-sm transition hover:bg-primary-hover"
                         >
                           Call
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
