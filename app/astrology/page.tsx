@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 };
 
 const services = [
-  { title: "Chat Astrologer", icon: "chat" },
-  { title: "Call Astrologer", icon: "call" },
-  { title: "Kundli", icon: "kundli" },
-  { title: "Horoscope", icon: "horoscope" },
-  { title: "Kundli Matching", icon: "matching" },
-  { title: "More", icon: "more" },
+  { title: "Chat Astrologer", icon: "chat", href: "/astrology/chat-with-astrologer" },
+  { title: "Call Astrologer", icon: "call", href: "#" },
+  { title: "Kundli", icon: "kundli", href: "#" },
+  { title: "Horoscope", icon: "horoscope", href: "#" },
+  { title: "Kundli Matching", icon: "matching", href: "#" },
+  { title: "More", icon: "more", href: "#" },
 ];
 
 const filters = ["Language", "Expertise", "Price", "Online Now"];
@@ -166,16 +166,16 @@ export default function AstrologyPage() {
         <section className="mt-7 overflow-x-auto pb-2" aria-label="Astrology services">
           <div className="grid min-w-[720px] grid-cols-6 gap-3 sm:min-w-0">
             {services.map((service) => (
-              <a
+              <Link
                 key={service.title}
-                href="#"
+                href={service.href}
                 className="group flex min-h-28 flex-col items-center justify-center gap-3 rounded-lg border border-border bg-surface px-3 text-center shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md"
               >
                 <span className="grid h-12 w-12 place-items-center rounded-md bg-primary-soft text-primary ring-1 ring-primary/15 transition group-hover:bg-primary group-hover:text-white">
                   <AstrologyIcon icon={service.icon} />
                 </span>
                 <span className="text-xs font-extrabold leading-4 text-primary-deep">{service.title}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
@@ -228,12 +228,12 @@ export default function AstrologyPage() {
                       </div>
 
                       <div className="grid w-full max-w-[10.5rem] grid-cols-2 gap-2 sm:w-[10.5rem]">
-                        <a
-                          href="#"
+                        <Link
+                          href="/astrology/chat-with-astrologer"
                           className="inline-flex h-9 items-center justify-center rounded-md border border-primary/20 bg-surface px-3 text-xs font-extrabold text-primary shadow-sm transition hover:bg-primary-soft"
                         >
                           Chat
-                        </a>
+                        </Link>
                         <a
                           href="#"
                           className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-3 text-xs font-extrabold text-white shadow-sm transition hover:bg-primary-hover"
