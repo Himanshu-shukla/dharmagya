@@ -3,7 +3,7 @@ import Link from "next/link";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Book Pandit", href: "/book-pandit-nearby" },
-  { label: "Online Puja", href: "#" },
+  { label: "Online Puja", href: "/book-online-puja" },
   { label: "Puja & Rituals", href: "#" },
   { label: "Astrology", href: "#" },
   { label: "Shop", href: "#" },
@@ -13,7 +13,7 @@ const navItems = [
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Book Pandit Nearby", href: "/book-pandit-nearby" },
-  { label: "Online Puja", href: "#" },
+  { label: "Online Puja", href: "/book-online-puja" },
   { label: "Puja & Rituals", href: "#" },
   { label: "Astrology", href: "#" },
   { label: "Shop", href: "#" },

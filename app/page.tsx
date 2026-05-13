@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const services = [
   { title: "Book Pandit Nearby", icon: "pandit", href: "/book-pandit-nearby" },
-  { title: "Book Online Puja", icon: "puja", href: "#" },
+  { title: "Book Online Puja", icon: "puja", href: "/book-online-puja" },
   { title: "Puja & Rituals", icon: "lotus", href: "#" },
   { title: "Chat to Astrologer", icon: "chat", href: "#" },
   { title: "Call to Astrologer", icon: "call", href: "#" },
@@ -211,7 +211,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:justify-center">
               <Link
-                href="/book-pandit-nearby"
+                href="/book-online-puja"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-primary px-6 text-sm font-bold text-white shadow-lg shadow-black/20 transition hover:bg-primary-hover"
               >
                 Book Puja Now
