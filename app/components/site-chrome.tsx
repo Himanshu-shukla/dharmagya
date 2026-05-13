@@ -5,7 +5,7 @@ const navItems = [
   { label: "Book Pandit", href: "/book-pandit-nearby" },
   { label: "Online Puja", href: "/book-online-puja" },
   { label: "Puja & Rituals", href: "/puja-and-rituals" },
-  { label: "Astrology", href: "#" },
+  { label: "Astrology", href: "/astrology" },
   { label: "Shop", href: "#" },
   { label: "Insights", href: "#" },
 ];
@@ -15,7 +15,7 @@ const quickLinks = [
   { label: "Book Pandit Nearby", href: "/book-pandit-nearby" },
   { label: "Online Puja", href: "/book-online-puja" },
   { label: "Puja & Rituals", href: "/puja-and-rituals" },
-  { label: "Astrology", href: "#" },
+  { label: "Astrology", href: "/astrology" },
   { label: "Shop", href: "#" },
   { label: "Dharmagya Insight", href: "#" },
 ];

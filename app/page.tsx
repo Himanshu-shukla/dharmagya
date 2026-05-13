@@ -5,8 +5,8 @@ const services = [
   { title: "Book Pandit Nearby", icon: "pandit", href: "/book-pandit-nearby" },
   { title: "Book Online Puja", icon: "puja", href: "/book-online-puja" },
   { title: "Puja & Rituals", icon: "lotus", href: "/puja-and-rituals" },
-  { title: "Chat to Astrologer", icon: "chat", href: "#" },
-  { title: "Call to Astrologer", icon: "call", href: "#" },
+  { title: "Chat to Astrologer", icon: "chat", href: "/astrology" },
+  { title: "Call to Astrologer", icon: "call", href: "/astrology" },
   { title: "Shop", icon: "shop", href: "#" },
   { title: "Dharmagya Insight", icon: "insight", href: "#" },
 ];
@@ -217,7 +217,7 @@ export default function Home() {
                 Book Puja Now
               </Link>
               <a
-                href="#"
+                href="/astrology"
                 className="inline-flex h-12 items-center justify-center rounded-md border border-white/35 bg-primary-deep/45 px-6 text-sm font-bold text-white backdrop-blur transition hover:bg-white/15"
               >
                 Talk to Astrologer
@@ -300,13 +300,13 @@ export default function Home() {
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <a
-                  href="#"
+                  href="/astrology"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-primary/20 text-sm font-bold text-primary transition hover:bg-primary-soft"
                 >
                   Chat
                 </a>
                 <a
-                  href="#"
+                  href="/astrology"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-primary/20 text-sm font-bold text-primary transition hover:bg-primary-soft"
                 >
                   Call
