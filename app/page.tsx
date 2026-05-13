@@ -4,7 +4,7 @@ import Link from "next/link";
 const services = [
   { title: "Book Pandit Nearby", icon: "pandit", href: "/book-pandit-nearby" },
   { title: "Book Online Puja", icon: "puja", href: "/book-online-puja" },
-  { title: "Puja & Rituals", icon: "lotus", href: "#" },
+  { title: "Puja & Rituals", icon: "lotus", href: "/puja-and-rituals" },
   { title: "Chat to Astrologer", icon: "chat", href: "#" },
   { title: "Call to Astrologer", icon: "call", href: "#" },
   { title: "Shop", icon: "shop", href: "#" },
