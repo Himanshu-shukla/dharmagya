@@ -209,7 +209,7 @@ export default function DharmagyaInsightPage() {
           <article className="rounded-lg border border-border bg-surface p-4 shadow-sm sm:p-5">
             <div className="mb-4">
               <h2 className="text-sm font-extrabold text-primary-deep">Today&apos;s Panchang</h2>
-              <p className="mt-1 text-xs font-semibold text-muted">27 May 2026, Tuesday</p>
+              <p className="mt-1 text-xs font-semibold text-muted">13 May 2026, Wednesday</p>
             </div>
             <div className="grid gap-3">
               {panchangItems.map((item) => (
