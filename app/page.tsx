@@ -7,7 +7,7 @@ const services = [
   { title: "Puja & Rituals", icon: "lotus", href: "/puja-and-rituals" },
   { title: "Chat to Astrologer", icon: "chat", href: "/astrology/chat-with-astrologer" },
   { title: "Call to Astrologer", icon: "call", href: "/astrology/call-to-astrologer" },
-  { title: "Shop", icon: "shop", href: "#" },
+  { title: "Shop", icon: "shop", href: "/shop" },
   { title: "Dharmagya Insight", icon: "insight", href: "/dharmagya-insight" },
 ];
 
