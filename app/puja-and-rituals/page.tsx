@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getRituals } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Puja & Rituals | Dharmagya",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
     "Explore daily pujas, festival rituals, sanskars, graha shanti, vastu puja, and other sacred rituals with Dharmagya.",
 };
 
-const categories = [
+const fallbackCategories = [
   "Daily Puja",
   "Festival Puja",
   "Sanskar Rituals",
@@ -34,7 +35,7 @@ type Ritual =
       icon: string;
     };
 
-const rituals: Ritual[] = [
+const fallbackRituals: Ritual[] = [
   {
     kind: "image",
     title: "Griha Pravesh Puja",
@@ -149,7 +150,17 @@ function RitualVisual({ ritual }: { ritual: Ritual }) {
   );
 }
 
-export default function PujaAndRitualsPage() {
+export default async function PujaAndRitualsPage() {
+  const ritualData = await getRituals();
+  const categories = ritualData.categories.length ? ritualData.categories : fallbackCategories;
+  const rituals: Ritual[] = ritualData.rituals.length
+    ? ritualData.rituals.map((ritual) =>
+        ritual.image
+          ? { kind: "image", title: ritual.title, description: ritual.description, image: ritual.image }
+          : { kind: "icon", title: ritual.title, description: ritual.description, icon: ritual.icon ?? "mundan" },
+      )
+    : fallbackRituals;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:py-8">

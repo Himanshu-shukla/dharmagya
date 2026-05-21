@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getProducts } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Puja Shop | Dharmagya",
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     "Shop authentic puja samagri, rudraksha, yantra, idols, malas, and spiritual essentials with Dharmagya.",
 };
 
-const categories = [
+const fallbackCategories = [
   { title: "Puja Samagri", icon: "samagri" },
   { title: "Rudraksha", icon: "rudraksha" },
   { title: "Yantra", icon: "yantra" },
@@ -17,7 +18,7 @@ const categories = [
   { title: "More", icon: "more" },
 ];
 
-const products = [
+const fallbackProducts = [
   {
     title: "Puja Thali Set",
     detail: "Brass",
@@ -248,7 +249,13 @@ function AssuranceIcon({ icon }: { icon: string }) {
   );
 }
 
-export default function BookOnlinePujaPage() {
+export default async function BookOnlinePujaPage() {
+  const productData = await getProducts();
+  const products = productData.products.length ? productData.products : fallbackProducts;
+  const categories = productData.categories.length
+    ? productData.categories.map((title) => ({ title, icon: title.toLowerCase().includes("rudraksha") ? "rudraksha" : title.toLowerCase().includes("yantra") ? "yantra" : title.toLowerCase().includes("mala") ? "mala" : "samagri" }))
+    : fallbackCategories;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:py-8">
@@ -321,8 +328,14 @@ export default function BookOnlinePujaPage() {
                     <span className="block font-bold text-muted">({product.detail})</span>
                   </h2>
                   <div className="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                    <span className="text-sm font-extrabold text-[#d14b1f]">{product.price}</span>
-                    <span className="text-[11px] font-bold text-muted line-through">{product.oldPrice}</span>
+                    <span className="text-sm font-extrabold text-[#d14b1f]">
+                      {typeof product.price === "number" ? `Rs ${product.price}` : product.price}
+                    </span>
+                    {product.oldPrice ? (
+                      <span className="text-[11px] font-bold text-muted line-through">
+                        {typeof product.oldPrice === "number" ? `Rs ${product.oldPrice}` : product.oldPrice}
+                      </span>
+                    ) : null}
                   </div>
                   <button
                     type="button"

@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getPandits, getRituals } from "@/lib/api";
 
 const steps = ["Location", "Ritual", "Pandit", "Details", "Payment"];
 
-const rituals = [
+const fallbackRituals = [
   { title: "Griha Pravesh", icon: "home" },
   { title: "Satyanarayan Puja", icon: "flame" },
   { title: "Wedding Puja", icon: "lotus" },
@@ -13,7 +14,7 @@ const rituals = [
   { title: "Festival Puja", icon: "spark" },
 ];
 
-const pandits = [
+const fallbackPandits = [
   {
     name: "Pandit Mohan Shastri",
     experience: "10+ Years Exp. - Hindi, Sanskrit",
@@ -111,7 +112,13 @@ function RitualIcon({ icon }: { icon: string }) {
   );
 }
 
-export default function BookPanditNearbyPage() {
+export default async function BookPanditNearbyPage() {
+  const [apiPandits, ritualsData] = await Promise.all([getPandits(), getRituals()]);
+  const pandits = apiPandits.length ? apiPandits : fallbackPandits;
+  const rituals = ritualsData.rituals.length
+    ? ritualsData.rituals.map((ritual) => ({ title: ritual.title.replace(" Puja", ""), icon: ritual.icon ?? "flame" }))
+    : fallbackRituals;
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:py-8">
@@ -218,12 +225,22 @@ export default function BookPanditNearbyPage() {
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                       <div className="min-w-0">
                         <h3 className="truncate text-sm font-extrabold text-primary-deep sm:text-base">{pandit.name}</h3>
-                        <p className="mt-1 text-xs font-semibold text-muted">{pandit.experience}</p>
-                        <p className="mt-1 text-xs font-semibold text-muted">{pandit.specialty}</p>
+                        <p className="mt-1 text-xs font-semibold text-muted">
+                          {"details" in pandit ? pandit.details : pandit.experience}
+                        </p>
+                        <p className="mt-1 text-xs font-semibold text-muted">
+                          {"expertise" in pandit && Array.isArray(pandit.expertise)
+                            ? `Specialist in ${pandit.expertise.join(", ")}`
+                            : "specialty" in pandit
+                              ? pandit.specialty
+                              : ""}
+                        </p>
                       </div>
 
                       <div className="flex shrink-0 items-center justify-between gap-4 sm:block sm:text-right">
-                        <p className="text-base font-extrabold text-foreground">{pandit.price}</p>
+                        <p className="text-base font-extrabold text-foreground">
+                          {"priceLabel" in pandit ? pandit.priceLabel : pandit.price}
+                        </p>
                         <button className="h-9 rounded-md bg-primary px-4 text-xs font-extrabold text-white shadow-sm transition hover:bg-primary-hover" type="button">
                           Book Now
                         </button>
@@ -231,8 +248,8 @@ export default function BookPanditNearbyPage() {
                     </div>
 
                     <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-bold text-muted">
-                      <span className="text-primary">Rating {pandit.rating}</span>
-                      <span>{pandit.distance}</span>
+                      <span className="text-primary">Rating {"ratingLabel" in pandit ? pandit.ratingLabel : pandit.rating}</span>
+                      <span>{"distanceKm" in pandit ? `${pandit.distanceKm} km away` : "distance" in pandit ? pandit.distance : ""}</span>
                     </div>
                   </div>
                 </div>

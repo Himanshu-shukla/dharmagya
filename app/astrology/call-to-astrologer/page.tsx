@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getAstrologers } from "@/lib/api";
+import { getDemoToken } from "@/lib/demo-auth";
+import { CallRealtime } from "./call-realtime";
 
 export const metadata: Metadata = {
   title: "Call Astrologer | Dharmagya",
@@ -110,7 +113,10 @@ function WaveBars() {
   );
 }
 
-export default function CallAstrologerPage() {
+export default async function CallAstrologerPage() {
+  const [astrologers, demoToken] = await Promise.all([getAstrologers(), getDemoToken()]);
+  const astrologer = astrologers[1] ?? astrologers[0];
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6 lg:py-7">
@@ -247,6 +253,7 @@ export default function CallAstrologerPage() {
               </div>
 
               <div className="border-t border-border bg-surface px-4 py-5 sm:px-6">
+                <CallRealtime token={demoToken} providerId={astrologer?.id ?? "demo-vikram"} />
                 <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-5">
                   {callControls.slice(0, 2).map((control) => (
                     <button

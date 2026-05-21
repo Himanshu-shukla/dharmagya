@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getAstrologers } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Astrology Services | Dharmagya",
@@ -19,7 +20,7 @@ const services = [
 
 const filters = ["Language", "Expertise", "Price", "Online Now"];
 
-const astrologers = [
+const fallbackAstrologers = [
   {
     name: "Dr. Neha Joshi",
     expertise: "Vedic, Numerology",
@@ -142,7 +143,9 @@ function StarIcon() {
   );
 }
 
-export default function AstrologyPage() {
+export default async function AstrologyPage() {
+  const astrologers = await getAstrologers();
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:py-8">
@@ -201,7 +204,7 @@ export default function AstrologyPage() {
 
         <section className="mt-5 rounded-lg border border-border bg-surface shadow-sm">
           <div className="divide-y divide-border">
-            {astrologers.map((astrologer) => (
+            {(astrologers.length ? astrologers : fallbackAstrologers).map((astrologer) => (
               <article key={astrologer.name} className="p-4 transition hover:bg-primary-soft/30 sm:p-5">
                 <div className="flex gap-4">
                   <Image
@@ -218,13 +221,17 @@ export default function AstrologyPage() {
                         <h3 className="truncate text-sm font-extrabold text-primary-deep sm:text-base">
                           {astrologer.name}
                         </h3>
-                        <p className="mt-1 text-xs font-semibold text-muted">{astrologer.expertise}</p>
+                        <p className="mt-1 text-xs font-semibold text-muted">
+                          {Array.isArray(astrologer.expertise) ? astrologer.expertise.join(", ") : astrologer.expertise}
+                        </p>
                         <p className="mt-1 text-xs font-semibold text-muted/90">{astrologer.details}</p>
                         <div className="mt-1 flex items-center gap-1 text-xs font-extrabold text-muted">
                           <StarIcon />
-                          <span>{astrologer.rating}</span>
+                          <span>{"ratingLabel" in astrologer ? astrologer.ratingLabel : astrologer.rating}</span>
                         </div>
-                        <p className="mt-2 text-sm font-extrabold text-foreground">{astrologer.price}</p>
+                        <p className="mt-2 text-sm font-extrabold text-foreground">
+                          {"priceLabel" in astrologer ? astrologer.priceLabel : astrologer.price}
+                        </p>
                       </div>
 
                       <div className="grid w-full max-w-[10.5rem] grid-cols-2 gap-2 sm:w-[10.5rem]">

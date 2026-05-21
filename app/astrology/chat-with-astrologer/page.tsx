@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getAstrologers } from "@/lib/api";
+import { getDemoToken } from "@/lib/demo-auth";
+import { ChatRealtime } from "./chat-realtime";
 
 export const metadata: Metadata = {
   title: "Chat with Astrologer | Dharmagya",
@@ -74,29 +77,6 @@ function MoreIcon() {
   );
 }
 
-function SendIcon() {
-  return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="m4 12 16-7-4.8 14-3.2-5.8zm0 0 8 1.2"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function SmileIcon() {
-  return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M8.8 14.2c1.6 1.5 4.8 1.5 6.4 0M9.2 10h.01M14.8 10h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
-    </svg>
-  );
-}
-
 function PlayIcon() {
   return (
     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -122,7 +102,10 @@ function TimerIcon() {
   );
 }
 
-export default function ChatWithAstrologerPage() {
+export default async function ChatWithAstrologerPage() {
+  const [astrologers, demoToken] = await Promise.all([getAstrologers(), getDemoToken()]);
+  const astrologer = astrologers[0];
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto max-w-6xl px-4 py-5 sm:px-6 lg:py-7">
@@ -320,33 +303,7 @@ export default function ChatWithAstrologerPage() {
                 })}
               </div>
 
-              <form className="border-t border-border bg-surface px-4 py-3 sm:px-5">
-                <div className="flex items-center gap-2 rounded-full border border-border bg-white px-3 py-2 shadow-sm focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10">
-                  <label className="sr-only" htmlFor="chat-message">
-                    Type your message
-                  </label>
-                  <input
-                    id="chat-message"
-                    type="text"
-                    placeholder="Type your message..."
-                    className="min-h-9 flex-1 bg-transparent text-sm font-semibold text-foreground outline-none placeholder:text-muted/60"
-                  />
-                  <button
-                    type="button"
-                    className="grid h-9 w-9 place-items-center rounded-full text-muted transition hover:bg-primary-soft hover:text-primary"
-                    aria-label="Choose emoji"
-                  >
-                    <SmileIcon />
-                  </button>
-                  <button
-                    type="submit"
-                    className="grid h-9 w-9 place-items-center rounded-full bg-primary text-white shadow-sm transition hover:bg-primary-hover"
-                    aria-label="Send message"
-                  >
-                    <SendIcon />
-                  </button>
-                </div>
-              </form>
+              <ChatRealtime token={demoToken} providerId={astrologer?.id ?? "demo-neha"} />
             </section>
           </div>
         </section>
